@@ -1,1 +1,1 @@
-REST Assured, Cucumber-JVM and Gradle
+http://the-creative-tester.github.io/REST-Assured-REST-API-Testing/
