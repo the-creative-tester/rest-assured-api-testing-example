@@ -1,0 +1,38 @@
+// apply the java plugin to add support for Java
+apply plugin: 'java'
+
+// in this section declare where to find the dependencies of your project
+repositories {
+    jcenter()
+}
+
+// in this section declare the dependencies for your production and test code
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.13'
+    testCompile 'junit:junit:4.12'
+    testCompile 'info.cukes:cucumber-java:1.2.0'
+    testCompile 'info.cukes:cucumber-junit:1.2.0'
+    testCompile 'com.jayway.restassured:rest-assured:2.4.1'
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'restassuredexample', 'src/test/resources']
+        }
+    }
+}
+
+test {
+    systemProperties = System.properties
+    testLogging.showStandardStreams = true
+}
