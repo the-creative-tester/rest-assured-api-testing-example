@@ -1,1 +1,1 @@
-http://the-creative-tester.github.io/REST-Assured-REST-API-Testing/
+http://the-creative-tester.github.io/Java-REST-API-Testing/
